@@ -25,7 +25,6 @@
 [node name="Game" type="Node"]
 
 [node name="Terrain" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="TileMap" type="TileMap" parent="Terrain"]
 tile_set = SubResource( 1 )
@@ -41,6 +40,8 @@ tiles = NodePath("../../../Game/Terrain/TileMap")
 script = ExtResource( 3 )
 simulation = NodePath("../Simulation")
 player = NodePath("../Tickables/Player")
+
+[node name="Highlights" type="Node" parent="InputController"]
 
 [node name="Simulation" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -76,3 +77,6 @@ script = ExtResource( 8 )
 
 [node name="PathFinding" type="Node" parent="."]
 script = ExtResource( 9 )
+
+[node name="Test" type="Node2D" parent="."]
+position = Vector2( 245, 385 )

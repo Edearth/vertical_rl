@@ -7,7 +7,7 @@ func _ready():
 	tiles = get_node(tiles) as TileMap
 
 func get_tile(position: Vector2):
-	return tiles.get_cell(position[0], position[1])
+	return tiles.get_cell(floor(position[0]), floor(position[1]))
 
 func get_map_position_from_global_position(position: Vector2):
 	return get_map_position_from_coordinates(position[0], position[1])

@@ -16,8 +16,13 @@ func set_movement(movement: Vector2):
 	if not gravity.isFalling:
 		self.direction = movement.normalized()
 
+func set_jump(jumpSpeed: Vector2):
+	if not gravity.isFalling:
+		gravity.fallSpeed = jumpSpeed
+		gravity.isFalling = true
+
 func move_to_tile_if_free(new_position: Vector2):
-	if pathfinding.is_tile_free(new_position):
+	if not pathfinding.is_tile_free(new_position):
 		return false
 	position = new_position
 	self.get_parent().global_position = terrain.get_global_position_from_map_position(position)
@@ -33,7 +38,6 @@ func tick():
 		gravity.calculate_player_falling()
 	else:
 		gravity.fall()
-		gravity.calculate_player_falling()
 	
 	self.direction = Vector2.ZERO
 	

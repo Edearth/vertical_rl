@@ -7,7 +7,8 @@ onready var terrain : TerrainController = get_node("/root/Game/Terrain/TerrainCo
 #	pass
 
 func is_tile_free(position : Vector2):
-	return terrain.get_tile(position) != -1
+	var tile = terrain.get_tile(position)
+	return tile == -1
 	
 func has_ground_beneath(position : Vector2):
 	return terrain.get_tile(position + Vector2.DOWN) != -1
