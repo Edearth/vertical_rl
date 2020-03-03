@@ -10,12 +10,13 @@ var direction : Vector2 = Vector2.ZERO
 
 func _ready():
 	self.position = terrain.get_map_position_from_global_position(self.get_parent().global_position)
+	self.gravity.entityController = self
 
 func set_movement(movement: Vector2):
 	if not gravity.isFalling:
 		self.direction = movement.normalized()
 
-func _move_to_tile_if_free(new_position: Vector2):
+func move_to_tile_if_free(new_position: Vector2):
 	if pathfinding.is_tile_free(new_position):
 		return false
 	position = new_position
@@ -24,28 +25,15 @@ func _move_to_tile_if_free(new_position: Vector2):
 
 func move():
 	var new_position = position + direction
-	_move_to_tile_if_free(new_position)
-
-func fall():
-	for i in range(gravity.fallSpeed):
-		var new_position = position + Vector2.DOWN 
-		_move_to_tile_if_free(new_position)
-	gravity.fallSpeed += 1
-
-func calculate_player_falling():
-	if pathfinding.has_ground_beneath(position):
-		gravity.isFalling = false
-		gravity.fallSpeed = 1
-	else:
-		gravity.isFalling = true
+	move_to_tile_if_free(new_position)
 
 func tick():
 	if not gravity.isFalling:
 		move()
-		calculate_player_falling()
+		gravity.calculate_player_falling()
 	else:
-		fall()
-		calculate_player_falling()
+		gravity.fall()
+		gravity.calculate_player_falling()
 	
 	self.direction = Vector2.ZERO
 	
