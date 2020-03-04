@@ -122,4 +122,3 @@ func _process(delta):
 		player.drop()
 		simulation.tick()
 	#add diagonal movement if needed (for climbing up and down seems nice
-	
