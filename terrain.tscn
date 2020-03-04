@@ -65,6 +65,9 @@ script = ExtResource( 6 )
 [node name="Player" type="Node2D" parent="Tickables"]
 position = Vector2( 528.51, 376.822 )
 
+[node name="Camera" type="Camera2D" parent="Tickables/Player"]
+current = true
+
 [node name="Sprite" type="Sprite" parent="Tickables/Player"]
 texture = ExtResource( 5 )
 offset = Vector2( 0, 2.5 )

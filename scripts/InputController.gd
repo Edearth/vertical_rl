@@ -54,6 +54,9 @@ func select_jump_controls():
 	elif Input.is_action_just_pressed("right"):
 		jumpDirection[0] = abs(jumpDirection[0])
 		update_jump_highlight()
+	elif Input.is_action_just_pressed("wait"):
+		print("! You wait.")
+		simulation.tick()
 	elif Input.is_action_just_pressed("confirm"):
 		highlight_clear()
 		selectingJumping = false
