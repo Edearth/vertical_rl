@@ -3,6 +3,7 @@ extends Node
 var entityController # set by controller
 onready var pathfinding : PathFinding = get_node("/root/Game/PathFinding")
 
+var enabled = true
 var isFalling = false
 var gravity = Vector2.DOWN # tile / turn
 var fallSpeed = Vector2.DOWN
@@ -61,27 +62,36 @@ func simulate_fall_until_grounded(initialPosition: Vector2, initialSpeed: Vector
 	return fallSimulationValues.positionList
 
 func fall():
-	var fallSimulationValues = {
-		"position" : entityController.position,
-		"speed" : fallSpeed,
-		"positionList" : [],
-		"bump": null
-	}
-	fallSimulationValues = simulate_fall_tick(fallSimulationValues)
-
-	if fallSimulationValues.bump:
-		print("! You bump against something.")
-	if len(fallSimulationValues.positionList) > 0:
-		entityController.move_to_tile_if_free(fallSimulationValues.positionList[-1])
-
-	self.fallSpeed = fallSimulationValues.speed
-	calculate_player_falling()
+	if enabled:
+		var fallSimulationValues = {
+			"position" : entityController.position,
+			"speed" : fallSpeed,
+			"positionList" : [],
+			"bump": null
+		}
+		fallSimulationValues = simulate_fall_tick(fallSimulationValues)
 	
-func calculate_player_falling():
-	if entityController.pathfinding.has_ground_beneath(entityController.position):
-		if isFalling:
-			print("! You land.")
+		if fallSimulationValues.bump:
+			print("! You bump against something.")
+		if len(fallSimulationValues.positionList) > 0:
+			entityController.move_to_tile_if_free(fallSimulationValues.positionList[-1])
+	
+		self.fallSpeed = fallSimulationValues.speed
+		calculate_player_falling()
+
+func set_grounded(isOnGround: bool):
+	if isOnGround:
 		isFalling = false
 		fallSpeed = Vector2.DOWN
 	else:
 		isFalling = true
+		
+	
+func calculate_player_falling():
+	if enabled:
+		if entityController.pathfinding.has_ground_beneath(entityController.position):
+			if isFalling:
+				print("! You land.")
+			set_grounded(true)
+		else:
+			set_grounded(false)

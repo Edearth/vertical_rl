@@ -12,6 +12,8 @@ var jumpDirection = defaultJump
 var jumpRotationGranularity = PI/8
 var jumpForce = 1.3
 
+var selectingGrab = false
+
 func _ready():
 	simulation = get_node(simulation)
 	player = get_node(player).find_node("PlayerController")
@@ -34,7 +36,6 @@ func highlight_jump_trajectory(positionList: Array):
 func select_jump_controls():
 	if Input.is_action_just_pressed("up"):
 		var current_angle = jumpDirection.angle()/PI
-		print(current_angle)
 		if current_angle > -0.51 and current_angle < 0.51:
 			jumpDirection = jumpDirection.rotated(-jumpRotationGranularity)
 		else:
@@ -42,7 +43,6 @@ func select_jump_controls():
 		update_jump_highlight()
 	elif Input.is_action_just_pressed("down"):
 		var current_angle = jumpDirection.angle()/PI
-		print(current_angle)
 		if current_angle > -0.51 and current_angle < 0.51:
 			jumpDirection = jumpDirection.rotated(jumpRotationGranularity)
 		else:
@@ -62,11 +62,38 @@ func select_jump_controls():
 		jumpDirection = defaultJump
 		simulation.tick()
 
+func select_grab_controls():
+	if Input.is_action_just_pressed("up"):
+		print("! You reach to the ceiling...")
+		player.grab(Vector2.UP)
+		selectingGrab = false
+		simulation.tick()
+	elif Input.is_action_just_pressed("down"):
+		print("! You reach to the ground...")
+		player.grab(Vector2.DOWN)
+		selectingGrab = false
+		simulation.tick()
+	elif Input.is_action_just_pressed("left"):
+		print("! You reach to the eastern wall...")
+		player.grab(Vector2.LEFT)
+		selectingGrab = false
+		simulation.tick()
+	elif Input.is_action_just_pressed("right"):
+		print("! You reach to the western wall...")
+		player.grab(Vector2.RIGHT)
+		selectingGrab = false
+		simulation.tick()
+
 func _process(delta):
+	#selection states
 	if selectingJumping:
 		select_jump_controls()
 		return
+	if selectingGrab:
+		select_grab_controls()
+		return
 	
+	#idle state
 	if Input.is_action_just_pressed("wait"):
 		print("! You wait.")
 		simulation.tick()
@@ -87,5 +114,12 @@ func _process(delta):
 		selectingJumping = true
 		update_jump_highlight()
 		return
+	elif Input.is_action_just_pressed("grab"):
+		print("! Grab where?")
+		selectingGrab = true
+		return
+	elif Input.is_action_just_pressed("drop"):
+		player.drop()
+		simulation.tick()
 	#add diagonal movement if needed (for climbing up and down seems nice
 	
