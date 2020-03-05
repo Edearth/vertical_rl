@@ -1,5 +1,5 @@
 extends Node
-class_name PlayerController
+class_name PlayerCharacter
 
 onready var terrain : TerrainController = get_node("/root/Game/Terrain/TerrainController")
 onready var pathfinding : PathFinding = get_node("/root/Game/PathFinding")
@@ -10,14 +10,16 @@ onready var stats : Stats = get_parent().get_node("Stats")
 var direction : Vector2 = Vector2.ZERO
 
 func _ready():
-	self.set_position(terrain.get_map_position_from_global_position(self.get_parent().global_position))
+	var starting_position = pathfinding.get_random_free_position()
+	self.set_position(terrain.get_map_position_from_global_position(starting_position))
 	self.gravity.entityController = self
 
 func get_position():
 	return position.position
 
 func set_position(newPosition: Vector2):
-	self.position.position = newPosition
+	self.position.position[0] = floor(newPosition[0])
+	self.position.position[1] = floor(newPosition[1])
 
 func set_movement(movement: Vector2):
 	#if not gravity.isFalling:

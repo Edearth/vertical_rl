@@ -7,7 +7,16 @@ onready var tickables : Node = get_node("/root/Game/Tickables")
 func is_tile_free(position : Vector2):
 	var tile = terrain.get_tile(position)
 	return tile == -1
-	
+
+func get_random_free_position():
+	var mapSize = terrain.get_map_size()
+	while true:
+		var random_x = floor(rand_range(mapSize.west, mapSize.east))
+		var random_y = floor(rand_range(mapSize.top, mapSize.bottom))
+		var random_position = Vector2(random_x, random_y)
+		if is_tile_free(random_position):
+			return random_position
+
 func has_ground_beneath(position : Vector2):
 	return terrain.get_tile(position + Vector2.DOWN) != -1
 

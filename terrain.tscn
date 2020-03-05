@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/tiles/PNG Dirt/Spritesheet/sheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TerrainController.gd" type="Script" id=2]
-[ext_resource path="res://scripts/InputController.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Simulation.gd" type="Script" id=4]
-[ext_resource path="res://assets/player.png" type="Texture" id=5]
-[ext_resource path="res://scripts/PlayerCharacter.gd" type="Script" id=6]
-[ext_resource path="res://scripts/AffectedByGravity.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Stats.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Position.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scripts/MovesLeftRightCharacter.gd" type="Script" id=10]
-[ext_resource path="res://scripts/PathFinding.gd" type="Script" id=11]
+[ext_resource path="res://TerrainGenerator.gd" type="Script" id=3]
+[ext_resource path="res://scripts/InputController.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Simulation.gd" type="Script" id=5]
+[ext_resource path="res://assets/player.png" type="Texture" id=6]
+[ext_resource path="res://scripts/PlayerCharacter.gd" type="Script" id=7]
+[ext_resource path="res://scripts/AffectedByGravity.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Stats.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Position.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/MovesLeftRightCharacter.gd" type="Script" id=11]
+[ext_resource path="res://scripts/PathFinding.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "sheet.png 0"
@@ -27,6 +28,7 @@
 [node name="Game" type="Node"]
 
 [node name="Terrain" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="TileMap" type="TileMap" parent="Terrain"]
 tile_set = SubResource( 1 )
@@ -38,60 +40,67 @@ tile_data = PoolIntArray( 65535, 5, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0,
 script = ExtResource( 2 )
 tiles = NodePath("../../../Game/Terrain/TileMap")
 
-[node name="InputController" type="Node" parent="."]
+[node name="TerrainGenerator" type="Node" parent="Terrain"]
 script = ExtResource( 3 )
+
+[node name="InputController" type="Node" parent="."]
+editor/display_folded = true
+script = ExtResource( 4 )
 simulation = NodePath("../Simulation")
 player = NodePath("../Tickables/Player")
 
 [node name="Highlights" type="Node" parent="InputController"]
 
 [node name="Simulation" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 terrain = NodePath("../../Game/Terrain/TerrainController")
 inputController = NodePath("../../Game/InputController")
 tickables = NodePath("../Tickables")
 
 [node name="Tickables" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Player" type="Node2D" parent="Tickables"]
+editor/display_folded = true
 position = Vector2( 528.51, 376.822 )
 
 [node name="Camera" type="Camera2D" parent="Tickables/Player"]
 current = true
 
 [node name="Sprite" type="Sprite" parent="Tickables/Player"]
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, 2.5 )
 
 [node name="PlayerController" type="Node" parent="Tickables/Player"]
-script = ExtResource( 6 )
-
-[node name="AffectedByGravity" type="Node" parent="Tickables/Player"]
 script = ExtResource( 7 )
 
-[node name="Stats" parent="Tickables/Player" instance=ExtResource( 8 )]
+[node name="AffectedByGravity" type="Node" parent="Tickables/Player"]
+script = ExtResource( 8 )
 
-[node name="Position" parent="Tickables/Player" instance=ExtResource( 9 )]
+[node name="Stats" parent="Tickables/Player" instance=ExtResource( 9 )]
+
+[node name="Position" parent="Tickables/Player" instance=ExtResource( 10 )]
 
 [node name="Enemy" type="Node2D" parent="Tickables"]
+editor/display_folded = true
 position = Vector2( 250, 595 )
 
 [node name="Sprite" type="Sprite" parent="Tickables/Enemy"]
 modulate = Color( 1, 0, 0, 1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, 2.5 )
 
 [node name="MovesLeftRight" type="Node" parent="Tickables/Enemy"]
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
-[node name="Stats" parent="Tickables/Enemy" instance=ExtResource( 8 )]
+[node name="Stats" parent="Tickables/Enemy" instance=ExtResource( 9 )]
 hp = 10
 atk = 2
 
-[node name="Position" parent="Tickables/Enemy" instance=ExtResource( 9 )]
+[node name="Position" parent="Tickables/Enemy" instance=ExtResource( 10 )]
 
 [node name="PathFinding" type="Node" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="Test" type="Node2D" parent="."]
 position = Vector2( 245, 385 )
