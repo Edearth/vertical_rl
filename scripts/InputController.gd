@@ -20,7 +20,7 @@ func _ready():
 
 func update_jump_highlight():
 	highlight_clear()
-	highlight_jump_trajectory(player.gravity.simulate_fall_until_grounded(player.position, jumpDirection*jumpForce))
+	highlight_jump_trajectory(player.gravity.simulate_fall_until_grounded(player.get_position(), jumpDirection*jumpForce))
 	
 func highlight_clear():
 	for child in highlights.get_children():

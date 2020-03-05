@@ -64,7 +64,7 @@ func simulate_fall_until_grounded(initialPosition: Vector2, initialSpeed: Vector
 func fall():
 	if enabled:
 		var fallSimulationValues = {
-			"position" : entityController.position,
+			"position" : entityController.get_position(),
 			"speed" : fallSpeed,
 			"positionList" : [],
 			"bump": null
@@ -89,7 +89,7 @@ func set_grounded(isOnGround: bool):
 	
 func calculate_player_falling():
 	if enabled:
-		if entityController.pathfinding.has_ground_beneath(entityController.position):
+		if entityController.pathfinding.has_ground_beneath(entityController.get_position()):
 			if isFalling:
 				print("! You land.")
 			set_grounded(true)

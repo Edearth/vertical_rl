@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "MovesLeftRight",
 "language": "GDScript",
-"path": "res://scripts/MovesLeftRight.gd"
+"path": "res://scripts/MovesLeftRightCharacter.gd"
 }, {
 "base": "Node",
 "class": "PathFinding",
@@ -27,7 +27,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PlayerController",
 "language": "GDScript",
-"path": "res://scripts/PlayerController.gd"
+"path": "res://scripts/PlayerCharacter.gd"
+}, {
+"base": "Node",
+"class": "Position",
+"language": "GDScript",
+"path": "res://scripts/Position.gd"
 }, {
 "base": "Node",
 "class": "Simulation",
@@ -59,6 +64,7 @@ _global_script_class_icons={
 "MovesLeftRight": "",
 "PathFinding": "",
 "PlayerController": "",
+"Position": "",
 "Simulation": "",
 "Stats": "",
 "TerrainController": "",
