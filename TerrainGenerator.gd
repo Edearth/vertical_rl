@@ -1,6 +1,8 @@
 extends Node
 class_name TerrainGenerator
 
+signal terrain_init_finished
+
 onready var tiles = get_parent().get_node("TileMap") as TileMap
 onready var terrain = get_parent().get_node("TerrainController") as TerrainController
 var noise : OpenSimplexNoise
@@ -21,14 +23,13 @@ func _ready():
 	generate_map()
 	terrain.height = height
 	terrain.width = width
+	emit_signal("terrain_init_finished")
 
 func generate_map():
 	
 	#draw borders
 	var border_width = floor(width/2)
 	for y in range(-height, height+1):
-		print("wall on ("+str(-border_width)+","+str(y)+")")
-		print("wall on ("+str(border_width)+","+str(y)+")")
 		tiles.set_cell(-border_width, y, WALL_TILE)
 		tiles.set_cell(border_width, y, WALL_TILE)
 	
