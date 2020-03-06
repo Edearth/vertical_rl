@@ -1,10 +1,10 @@
 extends Node
 class_name InputController
 
-onready var simulation = get_node("/root/Game/Highlights")
-onready var highlights = get_node("Highlights")
+onready var simulation : Simulation = get_node("/root/Game/Simulation")
+onready var player : PlayerCharacter = get_parent().get_node("PlayerCharacter")
+onready var highlights : Node = get_node("Highlights")
 onready var highlight_prefab = preload("res://scenes/tools/Highlight.tscn")
-var player
 
 var selectingJumping = false
 var defaultJump = Vector2(1,-1)

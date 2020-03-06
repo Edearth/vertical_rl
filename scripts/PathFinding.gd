@@ -4,9 +4,10 @@ class_name PathFinding
 onready var terrain : TerrainController = get_node("/root/Game/Terrain/TerrainController")
 onready var tickables : Node = get_node("/root/Game/Tickables")
 
+var FREE_TILE = -1
+
 func is_tile_free(position : Vector2):
-	var tile = terrain.get_tile(position)
-	return tile == -1
+	return terrain.get_tile(position) == FREE_TILE
 
 func get_random_free_position():
 	var mapSize = terrain.get_map_size()

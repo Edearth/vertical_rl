@@ -12,17 +12,19 @@ var direction = Vector2.LEFT
 
 func _ready():
 	var starting_position = pathfinding.get_random_free_position()
-	self.position.position = terrain.get_map_position_from_global_position(parent.global_position)
+	set_position(starting_position)
+	parent.global_position = terrain.get_global_position_from_map_position(get_position())
 
 func get_position():
 	return position.position
 
-func set_position(new_position: Vector2):
-	self.position.position = new_position
+func set_position(newPosition: Vector2):
+	self.position.position[0] = floor(newPosition[0])
+	self.position.position[1] = floor(newPosition[1])
 
 func move():
 	var new_position = get_position() + direction
-	if pathfinding.is_tile_free(new_position):
+	if not pathfinding.is_tile_free(new_position):
 		direction *= -1
 		new_position = get_position() + direction
 	set_position(new_position)

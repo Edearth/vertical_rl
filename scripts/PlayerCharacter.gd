@@ -6,12 +6,15 @@ onready var pathfinding : PathFinding = get_node("/root/Game/PathFinding")
 onready var gravity = get_parent().get_node("AffectedByGravity")
 onready var position : Position = get_parent().get_node("Position")
 onready var stats : Stats = get_parent().get_node("Stats")
+onready var parent = get_parent()
 
 var direction : Vector2 = Vector2.ZERO
 
 func _ready():
 	var starting_position = pathfinding.get_random_free_position()
+	print(starting_position)
 	self.set_position(terrain.get_map_position_from_global_position(starting_position))
+	parent.global_position = terrain.get_global_position_from_map_position(get_position())
 	self.gravity.entityController = self
 
 func get_position():

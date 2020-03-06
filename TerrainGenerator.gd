@@ -26,7 +26,6 @@ func _ready():
 	emit_signal("terrain_init_finished")
 
 func generate_map():
-	
 	#draw borders
 	var border_width = floor(width/2)
 	for y in range(-height, height+1):

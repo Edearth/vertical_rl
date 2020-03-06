@@ -85,6 +85,7 @@ Test_Directory="res://tests"
 [application]
 
 config/name="Cave Dweller Roguelike"
+run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
