@@ -1,8 +1,11 @@
 extends Node
 class_name InputController
 
-onready var simulation : Simulation = get_node("/root/Game/Simulation")
-onready var player : PlayerCharacter = get_parent().get_node("PlayerCharacter")
+export (NodePath) var _simulation
+onready var simulation : Simulation = get_node(_simulation)
+export (NodePath) var _player
+onready var player = get_node(_player).playerController
+
 onready var highlights : Node = get_node("Highlights")
 onready var highlight_prefab = preload("res://scenes/tools/Highlight.tscn")
 

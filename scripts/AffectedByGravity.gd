@@ -1,7 +1,8 @@
 extends Node
 
-var entityController # set by controller
-onready var pathfinding : PathFinding = get_node("/root/Game/PathFinding")
+# initialized by parent
+var pathfinding : PathFinding
+var entityController
 
 var enabled = true
 var isFalling = false
@@ -85,8 +86,7 @@ func set_grounded(isOnGround: bool):
 		fallSpeed = Vector2.DOWN
 	else:
 		isFalling = true
-		
-	
+
 func calculate_player_falling():
 	if enabled:
 		if entityController.pathfinding.has_ground_beneath(entityController.get_position()):

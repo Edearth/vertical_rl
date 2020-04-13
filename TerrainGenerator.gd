@@ -1,8 +1,6 @@
 extends Node
 class_name TerrainGenerator
 
-signal terrain_init_finished
-
 onready var tiles = get_parent().get_node("TileMap") as TileMap
 onready var terrain = get_parent().get_node("TerrainController") as TerrainController
 var noise : OpenSimplexNoise
@@ -23,7 +21,6 @@ func _ready():
 	generate_map()
 	terrain.height = height
 	terrain.width = width
-	emit_signal("terrain_init_finished")
 
 func generate_map():
 	#draw borders

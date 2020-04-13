@@ -1,21 +1,16 @@
 extends Node
-class_name PlayerCharacter
+class_name PlayerController
 
-onready var terrain : TerrainController = get_node("/root/Game/Terrain/TerrainController")
-onready var pathfinding : PathFinding = get_node("/root/Game/PathFinding")
-onready var gravity = get_parent().get_node("AffectedByGravity")
-onready var position : Position = get_parent().get_node("Position")
-onready var stats : Stats = get_parent().get_node("Stats")
+# initialized by connector
+var terrain : TerrainController
+var pathfinding : PathFinding
+
 onready var parent = get_parent()
+onready var gravity = parent.get_node("AffectedByGravity")
+onready var position : Position = parent.get_node("Position")
+onready var stats : Stats = parent.get_node("Stats")
 
 var direction : Vector2 = Vector2.ZERO
-
-func _ready():
-	var starting_position = pathfinding.get_random_free_position()
-	print(starting_position)
-	self.set_position(terrain.get_map_position_from_global_position(starting_position))
-	parent.global_position = terrain.get_global_position_from_map_position(get_position())
-	self.gravity.entityController = self
 
 func get_position():
 	return position.position
@@ -23,6 +18,7 @@ func get_position():
 func set_position(newPosition: Vector2):
 	self.position.position[0] = floor(newPosition[0])
 	self.position.position[1] = floor(newPosition[1])
+	parent.global_position = terrain.get_global_position_from_map_position(newPosition)
 
 func set_movement(movement: Vector2):
 	#if not gravity.isFalling:
@@ -38,7 +34,6 @@ func move_to_tile_if_free(newPosition: Vector2):
 	if not pathfinding.is_tile_free(newPosition):
 		return false
 	set_position(newPosition)
-	self.get_parent().global_position = terrain.get_global_position_from_map_position(get_position())
 	return true
 
 func grab(grabDirection: Vector2):
@@ -92,6 +87,3 @@ func tick():
 		gravity.fall()
 	
 	self.direction = Vector2.ZERO
-	
-	
-	
