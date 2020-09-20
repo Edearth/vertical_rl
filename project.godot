@@ -12,71 +12,82 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "InputController",
 "language": "GDScript",
-"path": "res://scripts/InputController.gd"
+"path": "res://old/scripts/InputController.gd"
 }, {
 "base": "Control",
 "class": "JumpPrediction",
 "language": "GDScript",
-"path": "res://JumpPrediction.gd"
+"path": "res://old/JumpPrediction.gd"
+}, {
+"base": "Node",
+"class": "MapData",
+"language": "GDScript",
+"path": "res://scenes/map/MapData.gd"
 }, {
 "base": "Node",
 "class": "MovesLeftRightController",
 "language": "GDScript",
-"path": "res://scenes/Enemies/SimpleEnemy/MovesLeftRightController.gd"
+"path": "res://old/scenes/Enemies/SimpleEnemy/MovesLeftRightController.gd"
 }, {
 "base": "Node",
 "class": "PathFinding",
 "language": "GDScript",
-"path": "res://scripts/PathFinding.gd"
+"path": "res://old/scripts/PathFinding.gd"
 }, {
 "base": "Node",
 "class": "PlayerConnector",
 "language": "GDScript",
-"path": "res://scenes/Player/PlayerConnector.gd"
+"path": "res://old/scenes/Player/PlayerConnector.gd"
 }, {
 "base": "Node",
 "class": "PlayerController",
 "language": "GDScript",
-"path": "res://scenes/Player/PlayerController.gd"
+"path": "res://old/scenes/Player/PlayerController.gd"
 }, {
 "base": "Node",
 "class": "Position",
 "language": "GDScript",
-"path": "res://scripts/Position.gd"
+"path": "res://old/scripts/Position.gd"
 }, {
 "base": "Node",
 "class": "Simulation",
 "language": "GDScript",
-"path": "res://scripts/Simulation.gd"
+"path": "res://old/scripts/Simulation.gd"
 }, {
 "base": "Node",
 "class": "Stats",
 "language": "GDScript",
-"path": "res://scripts/Stats.gd"
+"path": "res://old/scripts/Stats.gd"
 }, {
 "base": "Node",
 "class": "TerrainController",
 "language": "GDScript",
-"path": "res://scripts/TerrainController.gd"
+"path": "res://old/scripts/TerrainController.gd"
 }, {
 "base": "Node",
 "class": "TerrainGenerator",
 "language": "GDScript",
-"path": "res://TerrainGenerator.gd"
+"path": "res://old/TerrainGenerator.gd"
+}, {
+"base": "Reference",
+"class": "Tracery",
+"language": "GDScript",
+"path": "res://addons/tracery/Tracery.gd"
 }, {
 "base": "Reference",
 "class": "WAT",
 "language": "GDScript",
-"path": "res://addons/WAT/runner/namespace.gd"
+"path": "res://old/addons/WAT/runner/namespace.gd"
 }, {
 "base": "Node",
 "class": "WATTest",
 "language": "GDScript",
-"path": "res://addons/WAT/runner/test.gd"
+"path": "res://old/addons/WAT/runner/test.gd"
 } ]
 _global_script_class_icons={
 "InputController": "",
 "JumpPrediction": "",
+"MapData": "",
 "MovesLeftRightController": "",
 "PathFinding": "",
 "PlayerConnector": "",
@@ -86,6 +97,7 @@ _global_script_class_icons={
 "Stats": "",
 "TerrainController": "",
 "TerrainGenerator": "",
+"Tracery": "",
 "WAT": "",
 "WATTest": ""
 }
@@ -128,19 +140,23 @@ ui_focus_prev={
 }
 ui_left={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+ ]
 }
 ui_right={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+ ]
 }
 ui_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
 }
 ui_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
 }
 ui_page_up={
 "deadzone": 0.5,

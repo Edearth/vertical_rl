@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://old/assets/tiles/PNG Dirt/Spritesheet/sheet.png" type="Texture" id=1]
+[ext_resource path="res://scenes/map/MapController.gd" type="Script" id=2]
+[ext_resource path="res://scenes/map/MapData.gd" type="Script" id=3]
+
+[sub_resource type="TileSet" id=1]
+1/name = "sheet.png 1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 210, 70, 70, 70 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="OpenSimplexNoise" id=2]
+seed = 6
+octaves = 6
+period = 120.2
+
+[node name="Map" type="Node"]
+
+[node name="View" type="TileMap" parent="."]
+position = Vector2( 400, 400 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 70, 70 )
+cell_tile_origin = 1
+format = 1
+
+[node name="Data" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Controller" type="Node" parent="."]
+script = ExtResource( 2 )
+noise = SubResource( 2 )
