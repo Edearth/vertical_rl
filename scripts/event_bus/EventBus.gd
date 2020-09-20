@@ -1,4 +1,5 @@
 extends Node
 
-signal tick()
+signal player_finished_input()
+#signal tick()
 #signal enemy_attack(enemy_name)

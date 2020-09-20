@@ -1,6 +1,6 @@
 extends Node
 
-enum { MAP }
+enum { MAP, PLAYER }
 
 var _instances : Dictionary = {}
 
