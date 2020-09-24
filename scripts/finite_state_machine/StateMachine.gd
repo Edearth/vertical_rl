@@ -8,10 +8,10 @@ func _ready():
 	current_state = default_state.new()
 	current_state.on_enter(self)
 
-func change_state(newState):
+func change_state(new_state):
 	current_state.on_exit()
-	newState.on_enter(self)
-	current_state = newState
+	new_state.on_enter(self)
+	current_state = new_state
 
 func _process(delta):
 	if current_state:

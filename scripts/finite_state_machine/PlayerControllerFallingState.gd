@@ -6,8 +6,8 @@ var state_machine
 
 var idle_state = "res://scripts/finite_state_machine/PlayerControllerIdleState.gd"
 
-func on_enter(_stateMachine):
-	state_machine = _stateMachine
+func on_enter(_state_machine):
+	state_machine = _state_machine
 	map = Singletons.get_instance(Singletons.MAP)
 	player = Singletons.get_instance(Singletons.PLAYER)
 

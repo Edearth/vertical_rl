@@ -8,8 +8,8 @@ var state_machine
 var jump_state = "res://scripts/finite_state_machine/PlayerControllerSelectingJumpState.gd"
 var falling_state = "res://scripts/finite_state_machine/PlayerControllerFallingState.gd"
 
-func on_enter(_stateMachine):
-	state_machine = _stateMachine
+func on_enter(_state_machine):
+	state_machine = _state_machine
 	map = Singletons.get_instance(Singletons.MAP)
 	player = Singletons.get_instance(Singletons.PLAYER)
 

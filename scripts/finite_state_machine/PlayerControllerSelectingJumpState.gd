@@ -3,8 +3,8 @@ extends Node
 var state_machine
 var idle_state = "res://scripts/finite_state_machine/PlayerControllerIdleState.gd"
 
-func on_enter(_stateMachine):
-	state_machine = _stateMachine
+func on_enter(_state_machine):
+	state_machine = _state_machine
 	print("! Jump where?")
 #	update_jump_highlight()
 
@@ -12,7 +12,7 @@ func on_exit():
 	print("! Ok.")
 #	remove_jump_highlight()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("wait"):
 		print("! You wait.")
 		EventBus.emit_signal("player_finished_input")

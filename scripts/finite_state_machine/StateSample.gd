@@ -1,13 +1,13 @@
 extends Node
 
-var stateMachine
+var state_machine
 
-func onEnter(_stateMachine):
-	stateMachine = _stateMachine
+func onEnter(_state_machine):
+	state_machine = _state_machine
 	pass
 
 func onExit():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
