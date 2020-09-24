@@ -55,7 +55,7 @@ func step_through_movement(initial_coords, final_coords):
 		else:
 			next_coords.y += normalize(final_coords.y - next_coords.y)
 			
-		if is_cell_ground(next_coords):
+		if map.is_cell_ground(next_coords):
 			break
 		else:
 			current_coords = next_coords
@@ -72,7 +72,4 @@ func is_vertical_distance_bigger_than_horizontal(initial_coords, final_coords, c
 func hit_ground(actor):
 	var below_actor = actor.coordinates
 	below_actor.y += 1
-	return is_cell_ground(below_actor)
-
-func is_cell_ground(coords):
-	return map.get_cell(coords.x, coords.y) != TileMap.INVALID_CELL #this will need to be abstracted to check different tile types, probably on its own map thing
+	return map.is_cell_ground(below_actor)
