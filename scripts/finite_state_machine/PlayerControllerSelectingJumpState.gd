@@ -38,6 +38,11 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("right"):
 		cursor_coords.x += 1
 		cursor.set_coord(cursor_coords)
+	elif Input.is_action_just_pressed("confirm"):
+		player.velocity = cursor_coords - player.coordinates
+		print("jump: "+str(player.velocity))
+		EventBus.emit_signal("player_finished_input")
+		state_machine.change_state(load(idle_state).new())
 	elif Input.is_action_just_pressed("cancel"):
 		print("! Ok.")
 		state_machine.change_state(load(idle_state).new())
@@ -52,12 +57,11 @@ class Cursor extends ColorRect:
 
 	func set_coord(_coord : Vector2):
 		coord = _coord
+		print("cursor:"+str(_coord))
 		
 		self.rect_position = map.map_to_world(coord, true)
 		self.rect_size = map.cell_size
 		update()
-		print("test b")
 		
 	func _ready():
 		update()
-		print("test d - "+str(self.get_global_rect()))

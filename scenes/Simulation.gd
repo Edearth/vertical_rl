@@ -21,7 +21,7 @@ func run(_parameters):
 	while true:
 		tick()
 		physics_tick()
-	print("End simulation tick")
+		print("End simulation tick")
 
 func tick():
 	for actor in actors.get_children():
@@ -35,15 +35,20 @@ func physics_tick():
 			actor.is_falling = false
 			actor.velocity = Vector2.ZERO
 		elif not actor.is_falling:
-			actor.velocity.x = 0
+			#actor.velocity.x = 0
 			actor.is_falling = true
 
 func move_actor(actor):
 	var final_coords = Vector2(actor.coordinates.x + actor.velocity.x, actor.coordinates.y + actor.velocity.y)
 	var current_coords = step_through_movement(actor.coordinates, final_coords)
 	
+	if current_coords != final_coords:
+		#bumped against wall/ceiling, so loose momentum
+		actor.velocity = Vector2.ZERO
+	
 	# update coords
 	actor.coordinates = current_coords
+	print("curr:"+str(current_coords)+" vel:"+str(actor.velocity))
 
 func step_through_movement(initial_coords, final_coords):
 	var current_coords = initial_coords
